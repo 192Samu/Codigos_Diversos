@@ -275,43 +275,66 @@ void setup() {
 }
 
 void loop() {
-  pot = map(analogRead(A1), 0, 1023, 0, 1500);
-  
+  pot = map(analogRead(A1), 0, 1023, 200, 1500); 
+
   seta1(1);
   seta9(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500);  
   delay(pot);
+
   seta2(1);
   seta10(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500); 
   delay(pot);
+
   seta3(1);
   seta11(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500);
   delay(pot);
+
   seta4(1);
   seta12(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500);
   delay(pot);
+
   seta5(1);
   seta1(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500);
   delay(pot);
+
   seta6(1);
   seta2(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500);
   delay(pot);
+
   seta7(1);
   seta3(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500);
   delay(pot);
+
   seta8(1);
   seta4(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500);
   delay(pot);
+
   seta9(1);
   seta5(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500);
   delay(pot);
+
   seta10(1);
   seta6(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500);
   delay(pot);
+
   seta11(1);
   seta7(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500);
   delay(pot);
+
   seta12(1);
   seta8(0);
+  pot = map(analogRead(A1), 0, 1023, 200, 1500);
   delay(pot); 
   
 }
