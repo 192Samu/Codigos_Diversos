@@ -1,11 +1,11 @@
 #include <Adafruit_NeoPixel.h>
 
-#define QTDE_LEDs 24
+#define QTDE_LEDs 288
 #define DATA_PIN 3
-#define LEDs_SETA 2
+#define LEDs_SETA 4
 
 #define LED_0_SETA_1 0
-#define LED_0_SETA_2 2
+#define LED_0_SETA_2 71
 #define LED_0_SETA_3 4
 #define LED_0_SETA_4 6
 #define LED_0_SETA_5 8
@@ -28,7 +28,7 @@ void seta1(int state){
 if(state==1){
   for(int i = LED_0_SETA_1; i < LEDs_SETA; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(255,0,0));
+      setas.setPixelColor(i, setas.Color(255, 0, 0));
     }
   }
   setas.show();
@@ -49,7 +49,7 @@ void seta2(int state){
 if(state==1){
   for(int i = LED_0_SETA_2; i < LEDs_SETA + LED_0_SETA_2; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(255,0,128));
+      setas.setPixelColor(i, setas.Color(255, 0, 0));
     }
   }
   setas.show();
@@ -70,7 +70,7 @@ void seta3(int state){
 if(state==1){
   for(int i = LED_0_SETA_3; i < LEDs_SETA + LED_0_SETA_3; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(255,0,255));
+      setas.setPixelColor(i, setas.Color(255, 0, 0));
     }
   }
   setas.show();
@@ -91,7 +91,7 @@ void seta4(int state){
 if(state==1){
   for(int i = LED_0_SETA_4; i < LEDs_SETA + LED_0_SETA_4; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(128,0,255));
+      setas.setPixelColor(i, setas.Color(255, 0, 0));
     }
   }
   setas.show();
@@ -112,7 +112,7 @@ void seta5(int state){
 if(state==1){
   for(int i = LED_0_SETA_5; i < LEDs_SETA + LED_0_SETA_5; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(0,0,255));
+      setas.setPixelColor(i, setas.Color(255, 0, 0));
     }
   }
   setas.show();
@@ -133,7 +133,7 @@ void seta6(int state){
 if(state==1){
   for(int i = LED_0_SETA_6; i < LEDs_SETA + LED_0_SETA_6; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(0,128,255));
+      setas.setPixelColor(i, setas.Color(255, 0, 0));
     }
   }
   setas.show();
@@ -154,7 +154,7 @@ void seta7(int state){
 if(state==1){
   for(int i = LED_0_SETA_7; i < LEDs_SETA + LED_0_SETA_7; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(0,255,255));
+      setas.setPixelColor(i, setas.Color(255, 0, 0));
     }
   }
   setas.show();
@@ -174,7 +174,7 @@ void seta8(int state){
 if(state==1){
   for(int i = LED_0_SETA_8; i < LEDs_SETA + LED_0_SETA_8; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(0,255,128));
+      setas.setPixelColor(i, setas.Color(255, 0, 0));
     }
   }
   setas.show();
@@ -194,7 +194,7 @@ void seta9(int state){
 if(state==1){
   for(int i = LED_0_SETA_9; i < LEDs_SETA + LED_0_SETA_9; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(0,255,0));
+      setas.setPixelColor(i, setas.Color(255, 0, 0));
     }
   }
   setas.show();
@@ -214,7 +214,7 @@ void seta10(int state){
 if(state==1){
   for(int i = LED_0_SETA_10; i < LEDs_SETA + LED_0_SETA_10; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(128,255,0));
+      setas.setPixelColor(i, setas.Color(255, 0, 0));
     }
   }
   setas.show();
@@ -234,7 +234,7 @@ void seta11(int state){
 if(state==1){
   for(int i = LED_0_SETA_11; i < LEDs_SETA + LED_0_SETA_11; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(255,255,0));
+      setas.setPixelColor(i, setas.Color(255, 0, 0));
     }
   }
   setas.show();
@@ -254,7 +254,7 @@ void seta12(int state){
 if(state==1){
   for(int i = LED_0_SETA_12; i < LEDs_SETA + LED_0_SETA_12; i++){
     if (i < setas.numPixels()) {
-      setas.setPixelColor(i, setas.Color(255,128,0));
+      
     }
   }
   setas.show();
@@ -275,66 +275,64 @@ void setup() {
 }
 
 void loop() {
-  pot = map(analogRead(A1), 0, 1023, 200, 1500); 
+  pot = map(analogRead(A1), 0, 1023, 3000, 100); 
 
   seta1(1);
-  seta9(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500);  
+  seta9(0);  
   delay(pot);
 
   seta2(1);
   seta10(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500); 
   delay(pot);
 
   seta3(1);
   seta11(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500);
+  pot = map(analogRead(A1), 0, 1023, 3000, 100);
   delay(pot);
 
   seta4(1);
   seta12(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500);
+  pot = map(analogRead(A1), 0, 1023, 3000, 100);
   delay(pot);
 
   seta5(1);
   seta1(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500);
+  pot = map(analogRead(A1), 0, 1023, 3000, 100);
   delay(pot);
 
   seta6(1);
   seta2(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500);
+  pot = map(analogRead(A1), 0, 1023, 3000, 100);
   delay(pot);
 
   seta7(1);
   seta3(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500);
+  pot = map(analogRead(A1), 0, 1023, 3000, 100);
   delay(pot);
 
   seta8(1);
   seta4(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500);
+  pot = map(analogRead(A1), 0, 1023, 3000, 100);
   delay(pot);
 
   seta9(1);
   seta5(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500);
+  pot = map(analogRead(A1), 0, 1023, 3000, 100);
   delay(pot);
 
   seta10(1);
   seta6(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500);
+  pot = map(analogRead(A1), 0, 1023, 3000, 100);
   delay(pot);
 
   seta11(1);
   seta7(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500);
+  pot = map(analogRead(A1), 0, 1023, 3000, 100);
   delay(pot);
 
   seta12(1);
   seta8(0);
-  pot = map(analogRead(A1), 0, 1023, 200, 1500);
+  pot = map(analogRead(A1), 0, 1023, 3000, 100);
   delay(pot); 
   
 }
