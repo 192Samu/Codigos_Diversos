@@ -2,20 +2,20 @@
 
 #define QTDE_LEDs 288
 #define DATA_PIN 3
-#define LEDs_SETA 4
+#define LEDs_SETA 24
 
 #define LED_0_SETA_1 0
-#define LED_0_SETA_2 71
-#define LED_0_SETA_3 4
-#define LED_0_SETA_4 6
-#define LED_0_SETA_5 8
-#define LED_0_SETA_6 10
-#define LED_0_SETA_7 12
-#define LED_0_SETA_8 14
-#define LED_0_SETA_9 16
-#define LED_0_SETA_10 18
-#define LED_0_SETA_11 20
-#define LED_0_SETA_12 22
+#define LED_0_SETA_2 24
+#define LED_0_SETA_3 48
+#define LED_0_SETA_4 72
+#define LED_0_SETA_5 96
+#define LED_0_SETA_6 120
+#define LED_0_SETA_7 144
+#define LED_0_SETA_8 168
+#define LED_0_SETA_9 192
+#define LED_0_SETA_10 216
+#define LED_0_SETA_11 240
+#define LED_0_SETA_12 264
 
 
 Adafruit_NeoPixel setas(QTDE_LEDs, DATA_PIN, NEO_RGB);
@@ -254,7 +254,7 @@ void seta12(int state){
 if(state==1){
   for(int i = LED_0_SETA_12; i < LEDs_SETA + LED_0_SETA_12; i++){
     if (i < setas.numPixels()) {
-      
+      setas.setPixelColor(i, setas.Color(255,0,0));
     }
   }
   setas.show();
@@ -275,7 +275,7 @@ void setup() {
 }
 
 void loop() {
-  pot = map(analogRead(A1), 0, 1023, 3000, 100); 
+  pot = map(analogRead(A1), 0, 1023, 20, 3000); 
 
   seta1(1);
   seta9(0);  
@@ -287,52 +287,52 @@ void loop() {
 
   seta3(1);
   seta11(0);
-  pot = map(analogRead(A1), 0, 1023, 3000, 100);
+  pot = map(analogRead(A1), 0, 1023, 20, 3000);
   delay(pot);
 
   seta4(1);
   seta12(0);
-  pot = map(analogRead(A1), 0, 1023, 3000, 100);
+  pot = map(analogRead(A1), 0, 1023, 20, 3000);
   delay(pot);
 
   seta5(1);
   seta1(0);
-  pot = map(analogRead(A1), 0, 1023, 3000, 100);
+  pot = map(analogRead(A1), 0, 1023, 20, 3000);
   delay(pot);
 
   seta6(1);
   seta2(0);
-  pot = map(analogRead(A1), 0, 1023, 3000, 100);
+  pot = map(analogRead(A1), 0, 1023, 20, 3000);
   delay(pot);
 
   seta7(1);
   seta3(0);
-  pot = map(analogRead(A1), 0, 1023, 3000, 100);
+  pot = map(analogRead(A1), 0, 1023, 20, 3000);
   delay(pot);
 
   seta8(1);
   seta4(0);
-  pot = map(analogRead(A1), 0, 1023, 3000, 100);
+  pot = map(analogRead(A1), 0, 1023, 20, 3000);
   delay(pot);
 
   seta9(1);
   seta5(0);
-  pot = map(analogRead(A1), 0, 1023, 3000, 100);
+  pot = map(analogRead(A1), 0, 1023, 20, 3000);
   delay(pot);
 
   seta10(1);
   seta6(0);
-  pot = map(analogRead(A1), 0, 1023, 3000, 100);
+  pot = map(analogRead(A1), 0, 1023, 20, 3000);
   delay(pot);
 
   seta11(1);
   seta7(0);
-  pot = map(analogRead(A1), 0, 1023, 3000, 100);
+  pot = map(analogRead(A1), 0, 1023, 20, 3000);
   delay(pot);
 
   seta12(1);
   seta8(0);
-  pot = map(analogRead(A1), 0, 1023, 3000, 100);
+  pot = map(analogRead(A1), 0, 1023, 20, 3000);
   delay(pot); 
   
 }
