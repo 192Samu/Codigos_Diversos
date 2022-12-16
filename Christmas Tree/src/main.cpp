@@ -74,8 +74,6 @@ void loop() {
   led_tree.show();
 
   delay(10000);
-  // teste
-  
 
   led_tree.clear();
   led_tree.show();
