@@ -8,8 +8,6 @@
 
 Adafruit_NeoPixel led_tree (LEDs, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-int a = 5, b;
-
 unsigned long time1, 
               time2,
               timeEffect = 6900,
@@ -19,7 +17,8 @@ unsigned long time1,
 
 unsigned char led_sorteado,
               cor_anterior,
-              led_anterior;
+              led_anterior,
+              count = 0;
 
 uint32_t vermelho        =   led_tree.Color(255, 0, 0),
          rosa            =   led_tree.Color(255, 0, 128),
@@ -86,23 +85,114 @@ void sorteador(unsigned char num_leds){
     }
   }
 
-int leds_aleatorios(){
-  int ciclos = 0;
-  while (ciclos < 2500){
+void cor(){
+    led_tree.setPixelColor(0, vermelho);
+    led_tree.setPixelColor(1, rosa);
+    led_tree.setPixelColor(2, magenta);
+    led_tree.setPixelColor(3, violeta);
+    led_tree.show();
+    led_tree.setPixelColor(4, azul);
+    led_tree.show();
+    led_tree.setPixelColor(5, azure);
+    led_tree.show();
+    led_tree.setPixelColor(6, ciano);
+    led_tree.show();
+    led_tree.setPixelColor(7, verde_primavera);
+    led_tree.show();
+    led_tree.setPixelColor(8, verde);
+    led_tree.show();
+    led_tree.setPixelColor(9, verde_limao);
+    led_tree.show();
+    led_tree.setPixelColor(10, amarelo);
+    led_tree.show();
+    led_tree.setPixelColor(11, laranja);
+    led_tree.show();
+    led_tree.setPixelColor(12, branco);
+    led_tree.show();
+    led_tree.setPixelColor(13, vermelho);
+    led_tree.show();
+    led_tree.setPixelColor(14, rosa);
+    led_tree.show();
+    led_tree.setPixelColor(15, magenta);
+    led_tree.show();
+    led_tree.setPixelColor(16, violeta);
+    led_tree.show();
+    led_tree.setPixelColor(17, azul);
+    led_tree.show();
+    led_tree.setPixelColor(18, azure);
+    led_tree.show();
+    led_tree.setPixelColor(19, ciano);
+    led_tree.show();
+    led_tree.setPixelColor(20, verde_primavera);
+    led_tree.show();
+    led_tree.setPixelColor(21, verde);
+    led_tree.show();
+    led_tree.setPixelColor(22, verde_limao);
+    led_tree.show();
+    led_tree.setPixelColor(23, amarelo);
+    led_tree.show();
+    delay(10000);
+
+    for(int a = 0; a < LEDs_CORPO; a++){
+    if(a < LEDs_CORPO){
+      led_tree.setPixelColor(a, 0);
+      led_tree.show();
+    }
+  }
+  delay(20);
+    count = 1;
+}
+
+void LEDs_aleatorios(){
+  int e = 0; 
+  while(e < 250){
     sorteador(LEDs_CORPO);
-    Serial.println(cor_sorteada);
-    Serial.println(led_sorteado);
     led_tree.setPixelColor(led_sorteado, cor_sorteada);
     led_tree.show();
-    delay(100);
-    led_tree.setPixelColor(led_sorteado, 0);
-    led_tree.show();
-    ciclos++;
+    delay(75);
+    e++;
   }
-  
-  led_tree.clear();
-  led_tree.show();
-  return 1;
+  if(e == 250){
+    count = 2;
+  }
+  for(int a = 0; a < LEDs_CORPO; a++){
+    if(a < LEDs_CORPO){
+      led_tree.setPixelColor(a, 0);
+      led_tree.show();
+    }
+  }
+  delay(20);
+}
+
+void passeio_cor(){
+  int e = 0;
+  while(e < 10){
+    sorteador(LEDs_CORPO);
+    for(int h = 0; h < LEDs_CORPO; h++){
+      led_tree.setPixelColor(h, cor_sorteada);
+      led_tree.show();
+      delay(40);
+    }
+    e++;
+  }
+  if(e == 10){
+    count = 3;
+  }
+}
+
+void fade_in() {
+  uint32_t i, j;
+  sorteador(LEDs_CORPO);
+  for (j = cor_sorteada; j < 0; j--) {
+    for (i = 0; i < LEDs_CORPO; i++) {
+      led_tree.setPixelColor(i, j);
+    }
+    led_tree.show();
+    delay(50);
+  }
+  delay(500);
+
+  count = 0;
 }
 
 void setup() {
@@ -111,28 +201,18 @@ void setup() {
 }
 
 void loop() {
-led_tree.setPixelColor(0, 255, 80, 0);
-leds_aleatorios();
-led_tree.clear();
-led_tree.show();
-
-/*if(a == 0){
-  time1 = millis();
-  time2 = millis();
-  while(time2 - time1 < timeEffect){
-    led_tree.setPixelColor(24, 255, 80, 0);
-    led_tree.show();
-    int brilho = (exp(sin(millis() / 2000.0 * PI)) - 0.36787944) * 108.0;
-    led_tree.setBrightness(brilho);
-    for (int i = 0; i < LEDs_CORPO; i++){
-      if(i < LEDs_CORPO){
-        led_tree.setPixelColor(i,0,0,255);
-        led_tree.show();
-      }
-    
-    time2 = millis();
-    a = 1;
+  led_tree.setPixelColor(24, 255, 80, 0);
+  led_tree.show();
+if(count == 0){
+  cor();
+}
+if(count == 1){
+  LEDs_aleatorios();
+}
+if(count == 2){
+  passeio_cor();
+}
+if(count == 3){
+    fade_in();
   }
-}*/
-
 }
