@@ -1,26 +1,24 @@
-#include <Arduino.h>
+//#include <Arduino.h>          //Para a Arduino IDE, comente essa linha. Para o VS Code, descomente-a
 #include <Adafruit_NeoPixel.h>
 
-#define LEDs 25
-#define LEDs_CORPO 24
+//Definição dos pinos
 #define LED_PIN 2
 #define QTDE_CORES 13
 
+//Quantidades de LEDs a serem manipulados
+#define LEDs 25
+#define LEDs_CORPO 24
+
+//Objeto
 Adafruit_NeoPixel led_tree (LEDs, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-int a = 5, b;
+//Variáveis 
+uint8_t led_sorteado,
+        cor_anterior,
+        led_anterior,
+        count = 0;
 
-unsigned long time1, 
-              time2,
-              timeEffect = 6900,
-              timeEffect2 = 8100,
-              timeEffect3 = 8200,
-              timeEffect4 = 9300;
-
-unsigned char led_sorteado,
-              cor_anterior,
-              led_anterior;
-
+//Mapeamento de cores
 uint32_t vermelho        =   led_tree.Color(255, 0, 0),
          rosa            =   led_tree.Color(255, 0, 128),
          magenta         =   led_tree.Color(255, 0, 255),
@@ -36,13 +34,17 @@ uint32_t vermelho        =   led_tree.Color(255, 0, 0),
          branco          =   led_tree.Color(255, 255, 255),
          cor_sorteada;
 
+
+//Função para sortear valores de posição e cor
 void sorteador(unsigned char num_leds){
 
-  unsigned char sorteio_cor = random(QTDE_CORES),
-                sorteio_led = random(num_leds);
+  //Sorteia os valores
+  uint8_t sorteio_cor = random(QTDE_CORES),
+          sorteio_led = random(num_leds);
 
-  led_sorteado = sorteio_led;
+  led_sorteado = sorteio_led;       //variável que recebe a posição do led sorteado
 
+  //Atribui cores às posições sorteadas
   switch (sorteio_cor){
     case 0:
       cor_sorteada = vermelho;
@@ -86,23 +88,109 @@ void sorteador(unsigned char num_leds){
     }
   }
 
-int leds_aleatorios(){
-  int ciclos = 0;
-  while (ciclos < 2500){
+// Efeito árvore colorida estática
+void cor(){
+    led_tree.setPixelColor(0, vermelho);
+    led_tree.setPixelColor(1, rosa);
+    led_tree.setPixelColor(2, magenta);
+    led_tree.setPixelColor(3, violeta);
+    led_tree.show();
+    led_tree.setPixelColor(4, azul);
+    led_tree.show();
+    led_tree.setPixelColor(5, azure);
+    led_tree.show();
+    led_tree.setPixelColor(6, ciano);
+    led_tree.show();
+    led_tree.setPixelColor(7, verde_primavera);
+    led_tree.show();
+    led_tree.setPixelColor(8, verde);
+    led_tree.show();
+    led_tree.setPixelColor(9, verde_limao);
+    led_tree.show();
+    led_tree.setPixelColor(10, amarelo);
+    led_tree.show();
+    led_tree.setPixelColor(11, laranja);
+    led_tree.show();
+    led_tree.setPixelColor(12, branco);
+    led_tree.show();
+    led_tree.setPixelColor(13, vermelho);
+    led_tree.show();
+    led_tree.setPixelColor(14, rosa);
+    led_tree.show();
+    led_tree.setPixelColor(15, magenta);
+    led_tree.show();
+    led_tree.setPixelColor(16, violeta);
+    led_tree.show();
+    led_tree.setPixelColor(17, azul);
+    led_tree.show();
+    led_tree.setPixelColor(18, azure);
+    led_tree.show();
+    led_tree.setPixelColor(19, ciano);
+    led_tree.show();
+    led_tree.setPixelColor(20, verde_primavera);
+    led_tree.show();
+    led_tree.setPixelColor(21, verde);
+    led_tree.show();
+    led_tree.setPixelColor(22, verde_limao);
+    led_tree.show();
+    led_tree.setPixelColor(23, amarelo);
+    led_tree.show();
+    delay(10000);
+
+    //Desliga todos os leds de uma só vez
+    for(int a = 0; a < LEDs_CORPO; a++){
+    if(a < LEDs_CORPO){
+      led_tree.setPixelColor(a, 0);
+      led_tree.show();
+    }
+  }
+  delay(20);
+    count = 1;        //Atualiza a variável de controle
+}
+
+//Efeito LEDs coloridos aleatórios
+void LEDs_aleatorios(){
+  int e = 0;        //variável que recebe o número de ciclos desejados
+
+  //Sorteia 250 vezes um número qualquer entre 0 e 23 e liga o led referente a esse núemro, desligando-o na sequência 
+  while(e < 250){
     sorteador(LEDs_CORPO);
-    Serial.println(cor_sorteada);
-    Serial.println(led_sorteado);
     led_tree.setPixelColor(led_sorteado, cor_sorteada);
     led_tree.show();
-    delay(100);
-    led_tree.setPixelColor(led_sorteado, 0);
-    led_tree.show();
-    ciclos++;
+    delay(75);
+    e++;
   }
-  
-  led_tree.clear();
-  led_tree.show();
-  return 1;
+  if(e == 250){
+    count = 2;      //Atualiza a variável de controle
+  }
+
+  //Desliga todos os leds de uma só vez
+  for(int a = 0; a < LEDs_CORPO; a++){
+    if(a < LEDs_CORPO){
+      led_tree.setPixelColor(a, 0);
+      led_tree.show();
+    }
+  }
+  delay(20);
+}
+
+//Efeito de cores percorrendo todo o corpo da árvore
+void passeio_cor(){
+  int e = 0;        //variável que recebe o número de ciclos desejados
+
+  //Faz com que uma cor seja sorteada e percorra toda a árvore, repetindo o ciclo por 10 vezes
+  while(e < 10){
+    sorteador(LEDs_CORPO);
+    for(int h = 0; h < LEDs_CORPO; h++){
+      led_tree.setPixelColor(h, cor_sorteada);
+      led_tree.show();
+      delay(40);
+    }
+    e++;
+  }
+  if(e == 10){
+    count = 0;      //Atualiza a variável de controle
+  }
 }
 
 void setup() {
@@ -111,28 +199,17 @@ void setup() {
 }
 
 void loop() {
-led_tree.setPixelColor(0, 255, 80, 0);
-leds_aleatorios();
-led_tree.clear();
-led_tree.show();
+  led_tree.setPixelColor(24, 255, 80, 0);     //Mantém o LED da estrela permanentemente ligado
+  led_tree.show();
 
-/*if(a == 0){
-  time1 = millis();
-  time2 = millis();
-  while(time2 - time1 < timeEffect){
-    led_tree.setPixelColor(24, 255, 80, 0);
-    led_tree.show();
-    int brilho = (exp(sin(millis() / 2000.0 * PI)) - 0.36787944) * 108.0;
-    led_tree.setBrightness(brilho);
-    for (int i = 0; i < LEDs_CORPO; i++){
-      if(i < LEDs_CORPO){
-        led_tree.setPixelColor(i,0,0,255);
-        led_tree.show();
-      }
-    
-    time2 = millis();
-    a = 1;
+  //Controla os efeitos
+  if(count == 0){
+    cor();
   }
-}*/
-
+  if(count == 1){
+    LEDs_aleatorios();
+  }
+  if(count == 2){
+    passeio_cor();
+  }
 }
